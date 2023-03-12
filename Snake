@@ -1,0 +1,114 @@
+import turtle
+import random
+
+pencil = turtle.Turtle()
+screen = turtle.Screen()
+screen.setworldcoordinates(-95 , -95 , 95 , 95)
+pencil.shape("square")
+pencil.penup()
+ereser = turtle.Turtle()
+ereser.ht()
+ereser.penup()
+ereser.shape("square")
+ereser.color("white")
+apple = turtle.Turtle()
+apple.ht()
+apple.penup()
+apple.shape("circle")
+apple.color("Red")
+def main():
+    playing = True
+    colisionArea = 6
+    score = 0
+    position1 = (0 , 0)
+    posinion2 = (0 , 0)
+    position3 = (0 , 0)
+    position4 = (0 , 0)
+    timesMoved = 0
+    screen.delay(50)
+    applePlaced = False
+    
+    while playing == True:
+        if applePlaced == False:
+            applePosition = placeApple()
+            print(applePosition)
+            applePlaced = True  
+        if (pencil.xcor() - colisionArea <= applePosition[0]) and (pencil.xcor() + colisionArea >= applePosition[0]) and (pencil.ycor() + colisionArea >= applePosition[1]) and (pencil.ycor() - colisionArea <= applePosition[1]):
+            applePlaced = False
+            score += 1
+            print("Apple Eaten")
+            pencil.fd(3)
+            pencil.stamp()
+        else:
+            if timesMoved == 0:
+                position1 = pencil.position()
+                pencil.fd(3)
+                pencil.stamp()
+                ereser.goto(posinion2)
+                ereser.stamp()
+                timesMoved += 1
+            elif timesMoved == 1:
+                posinion2 = pencil.position()
+                pencil.fd(3)
+                pencil.stamp()
+                ereser.goto(position3)
+                ereser.stamp()
+                timesMoved += 1
+            elif timesMoved == 2:
+                position3 = pencil.position()
+                pencil.fd(3)
+                pencil.stamp()
+                ereser.goto(position4)
+                ereser.stamp()
+                timesMoved += 1
+            elif timesMoved == 3:
+                position4 = pencil.position()
+                pencil.fd(3)
+                pencil.stamp()
+                ereser.goto(position1)
+                ereser.stamp()
+                timesMoved = 0         
+            
+        turtle.onkey(up , "w")
+        turtle.onkey(left , "a")
+        turtle.onkey(down , "s")
+        turtle.onkey(right , "d")
+        turtle.onkey(end , "Escape")
+        turtle.listen()
+        if pencil.xcor()>= 95 or pencil.xcor()<= -95 or pencil.ycor()<= -95 or pencil.ycor()>= 95:
+            pencil.reset()
+            pencil.ht()
+            pencil.write(f"GAME OVER\nyou ate {score} apple(s)")
+            turtle.done()
+            playing = False
+                  
+def placeApple():
+    apple.color("white")
+    apple.stamp()    
+    appleSpotX = random.randint(-90 , 90)
+    appleSpotY = random.randint(-90 , 90)
+    apple.goto(appleSpotX , appleSpotY)
+    apple.color("red")
+    apple.stamp()
+    return appleSpotX , appleSpotY
+        
+def up():
+    pencil.setheading(90)
+    pencil.heading()
+    
+def down():
+    pencil.setheading(270)
+    pencil.heading()
+    
+def left():
+    pencil.setheading(180)
+    pencil.heading()
+    
+def right():
+    pencil.setheading(0)
+    pencil.heading()
+
+def end():
+    turtle.done()
+
+main()
