@@ -15,10 +15,10 @@ def main():
     playing = True
     tailCords = []
     colisionArea = 6
-    colisionArea1 = 4#the area around the head of the snake were it will colide with it's self or the apple
+    colisionArea1 = 4#the area around the head of the snake where it will collide with itself or the apple
     score = 0
     timesMoved = 0
-    screen.delay(50)#makes the turtle move at a resonable speed
+    screen.delay(50)#makes the turtle move at a reasonable speed
     applePlaced = False
     while playing == True:
         if applePlaced == False:#checks to see if there is an apple on the board, if not, one is placed
@@ -33,7 +33,7 @@ def main():
             pencil.stamp()
         else:
             if timesMoved == 0:
-                for i in range(3):#gives the snake its inital length so it is not just one segment long at the begining
+                for i in range(3):#gives the snake its initial length so it is not just one segment long at the beginning
                     tailCords.append(pencil.xcor())
                     tailCords.append(pencil.ycor())
                     pencil.fd(5)
